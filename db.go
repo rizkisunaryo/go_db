@@ -7,6 +7,7 @@ import (
 
 func ExecLog(db *sql.DB, sqlStr string, args ...interface{}) (sql.Result,string,error) {
 	stmt,err := db.Prepare(sqlStr)
+	defer stmt.Close()
 	if err != nil {
 		return nil,sqlStr,err
 	}
